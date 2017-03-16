@@ -4,7 +4,7 @@
 python脚本，用于登录、登出和注销北医网关
 
 需要：
-1. 安装python3.x(https://www.python.org/downloads/)
+1. 安装python3.x -> [python.org](https://www.python.org/downloads/)
 2. 配置好python的环境变量（windows中`我的电脑`-`控制面板`-`环境变量设置`），将python的安装目录填上
 3. 打开命令行， 输入 `pip install httplib2`
 
