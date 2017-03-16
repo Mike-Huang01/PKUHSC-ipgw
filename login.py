@@ -5,6 +5,7 @@ import json
 import time
 import httplib2
 import getpass
+from base64 import b64encode, b64decode
 
 def login(data):
     global log
@@ -63,13 +64,13 @@ try:
         if 'config.json' in os.listdir(base):
             with open(configf,'r') as config:
                 config_dict = json.load(config)
-            config_dict['username'] = config_dict['username']
+            config_dict['password'] = b64decode(config_dict['password'].encode()).decode()
             datastring = '&'.join([tag + '=' + config_dict[tag] for tag in tags])
         else:
               config_dict = {'drop' : '1','type': '1', 'n': '100'}
               username = input("school id: ")
               passw = getpass.getpass()
-              config_dict['password'] = '{TEXT}' + passw
+              config_dict['password'] ='{TEXT}' + passw
               config_dict['username'] = username
               datastring = '&'.join([tag + '=' + config_dict[tag] for tag in tags])
 
@@ -90,6 +91,7 @@ try:
                     if not config_dict.get('uid'):
                         config_dict['uid'] = content
                         with open(configf, 'w+') as config:
+                            config_dict['password'] = b64encode(config_dict['password'].encode()).decode()
                             json.dump(config_dict, config)
                     break
                 elif(content == 'ip_exist_error'):
